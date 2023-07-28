@@ -40,9 +40,6 @@ public class TripInfoView {
 	/** 관광지 이미지 표시 Panel */
 	private JLabel imgL;
 	private JLabel[] tripInfoL;
-	private String[] imgArray = { "image01.jpg", "image02.jpg", "image03.jpg", "image04.jpg",
-									"image05.jpg", "image06.jpg", "image07.jpg", "image08.jpg", 
-									"image09.jpg", "image10.jpg", "image11.jpg" };
 
 	/** 조회 조건 */
 	private JComboBox<String> findC;
@@ -86,8 +83,6 @@ public class TripInfoView {
 
 	private void showTripInfo(int num) {
 		curTrip = tripService.search(num);
-		Random rand = new Random();
-		curTrip.setImg(imgArray[rand.nextInt(11)]);
 
 		tripInfoL[0].setText("");
 		tripInfoL[1].setText("");
@@ -193,7 +188,7 @@ public class TripInfoView {
 
 		// complete code #01
 		// 아래의 코드를 참조하여 아래 라인을 uncomment 하고 searchBt.addActionList() 를 Lambda 표현식으로 바꾸세요.
-		ActionListener buttonHandler =  e  -> searchTrips();
+		ActionListener buttonHandler = e -> searchTrips();
 		searchBt.addActionListener(buttonHandler);
 
 		// 참조코드 시작 - 위 코드를 완성 후 삭제 또는 comment 처리하세요.

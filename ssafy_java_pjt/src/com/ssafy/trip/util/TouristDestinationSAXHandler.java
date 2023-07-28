@@ -2,6 +2,7 @@ package com.ssafy.trip.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -23,6 +24,9 @@ public class TouristDestinationSAXHandler extends DefaultHandler {
 	private TripDto tripDto;
 	/** 태그 바디 정보를 임시로 저장 */
 	private String temp;
+	private String[] imgArray = { "image01.jpg", "image02.jpg", "image03.jpg", "image04.jpg",
+			"image05.jpg", "image06.jpg", "image07.jpg", "image08.jpg", 
+			"image09.jpg", "image10.jpg", "image11.jpg" };
 
 	public TouristDestinationSAXHandler() {
 		trips = new ArrayList<TripDto>();
@@ -34,7 +38,9 @@ public class TouristDestinationSAXHandler extends DefaultHandler {
 		if (qName.equals("record")) {
 			// complete code #04
 			// tripDto 객체를 생성(이미지 정보 세팅)하고 trips List에 추가하세요.
-			tripDto = new TripDto(num);
+			tripDto = new TripDto(num++);
+			Random rand = new Random();
+			tripDto.setImg(imgArray[rand.nextInt(11)]);
 			trips.add(tripDto);
 		}
 	}
@@ -59,6 +65,8 @@ public class TouristDestinationSAXHandler extends DefaultHandler {
 				tripDto.setLng(Double.parseDouble(temp));
 		} else if (qName.equals("관광지소개")) {
 			tripDto.setInfo(temp);
+		} else if (qName.equals("관리기관전화번호")) {
+			tripDto.setTel(temp);
 		}
 	}
 

@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -39,6 +40,9 @@ public class TripInfoView {
 	/** 관광지 이미지 표시 Panel */
 	private JLabel imgL;
 	private JLabel[] tripInfoL;
+	private String[] imgArray = { "image01.jpg", "image02.jpg", "image03.jpg", "image04.jpg",
+									"image05.jpg", "image06.jpg", "image07.jpg", "image08.jpg", 
+									"image09.jpg", "image10.jpg", "image11.jpg" };
 
 	/** 조회 조건 */
 	private JComboBox<String> findC;
@@ -82,6 +86,8 @@ public class TripInfoView {
 
 	private void showTripInfo(int num) {
 		curTrip = tripService.search(num);
+		Random rand = new Random();
+		curTrip.setImg(imgArray[rand.nextInt(11)]);
 
 		tripInfoL[0].setText("");
 		tripInfoL[1].setText("");

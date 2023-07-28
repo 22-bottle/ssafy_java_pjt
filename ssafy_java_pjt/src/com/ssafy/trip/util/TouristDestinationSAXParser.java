@@ -23,6 +23,7 @@ public class TouristDestinationSAXParser {
 	public TouristDestinationSAXParser() {
 		// complete code #08
 		// 전국관광지정보표준데이터.xml을 loading하도록 처리하세요.
+		this.loadData();
 	}
 
 	/**
@@ -39,8 +40,9 @@ public class TouristDestinationSAXParser {
 			TouristDestinationSAXHandler handler = new TouristDestinationSAXHandler();
 			parser.parse(tripInfoFilePath, handler);
 			tripInfo = handler.getTrips();
-
+			
 			size = tripInfo.size();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

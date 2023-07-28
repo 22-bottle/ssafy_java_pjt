@@ -60,6 +60,8 @@ public class TripInfoView {
 
 	/** 화면에 표시하고 있는 주택 */
 	private TripDto curTrip;
+	
+	private JButton festivalBt;
 
 	public TripInfoView() {
 		/* Service들 생성 */
@@ -94,6 +96,8 @@ public class TripInfoView {
 		tripInfoL[7].setText(curTrip.getTel());
 		tripInfoL[8].setText(curTrip.getInfo());
 		tripInfoL[9].setText("");
+		
+		festivalBt = new JButton("근처 축제 살펴보기");
 
 		ImageIcon icon = null;
 		if (curTrip.getImg() != null && curTrip.getImg().trim().length() != 0) {
@@ -163,7 +167,7 @@ public class TripInfoView {
 		tripTable = new JTable(tripModel);
 		tripPan = new JScrollPane(tripTable);
 		tripTable.setColumnSelectionAllowed(true);
-		rightCenter.add(new JLabel("광광지 정보", JLabel.CENTER), "North");
+		rightCenter.add(new JLabel("관광지 정보", JLabel.CENTER), "North");
 		rightCenter.add(tripPan, "Center");
 
 		right.add(rightTop, "North");

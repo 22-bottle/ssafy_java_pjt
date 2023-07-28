@@ -22,9 +22,9 @@ import javax.swing.table.TableColumnModel;
 public class WeatherMain extends JFrame {
 	private JPanel northPanel = new JPanel();
 	private String[] item = { "서울", "광주", "구미", "대전", "부울경" };
-	private String[] dong = { "1168064000", "2915573000", "4719060000", "3020052600", "2635061000" };
-	private JComboBox<String> area = new JComboBox<String>(item);
-	private JButton weatherBtn = new JButton("날씨 정보얻기");
+	private String[] dong = {"1168064000", "2915573000", "4719060000", "3020052600", "2635061000"};
+	private JComboBox area = new JComboBox<String>(item);
+	private JButton b = new JButton("call Weather");
 
 	/** 조회 내용 표시할 table */
 	private DefaultTableModel tableModel;
@@ -36,7 +36,7 @@ public class WeatherMain extends JFrame {
 
 	public WeatherMain() {
 		super("날씨정보");
-		sax = WeatherSaxParser.getParser();
+		sax = new WeatherSaxParser();
 		createGUI();
 		addEvent();
 	}
@@ -47,7 +47,7 @@ public class WeatherMain extends JFrame {
 
 			@Override
 			public Class<?> getColumnClass(int column) {
-				if (getValueAt(0, column) != null)
+				if(getValueAt(0, column) != null)
 					return getValueAt(0, column).getClass();
 				return String.class;
 			}
@@ -59,13 +59,11 @@ public class WeatherMain extends JFrame {
 
 		northPanel.setLayout(new GridLayout(1, 2));
 		northPanel.add(area);
-		northPanel.add(weatherBtn);
-
+		northPanel.add(b);
+		
 		add(northPanel, "North");
 		add(weatherPan, "Center");
-//		setSize(700, 600);
-//		setLocation(600, 250);
-		setBounds(600, 250, 700, 600);
+		setSize(600, 500);
 		setVisible(true);
 	}
 
@@ -75,9 +73,7 @@ public class WeatherMain extends JFrame {
 				System.exit(0);
 			}
 		});
-		
-//		TODO: Lambda 표현식으로 바꾸세요.
-		weatherBtn.addActionListener(new ActionListener() {
+		b.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showList();
@@ -85,7 +81,7 @@ public class WeatherMain extends JFrame {
 		});
 	}
 
-	private void showList() {
+	protected void showList() {
 		int sel = area.getSelectedIndex();
 		java.util.List<WeatherDto> datas = sax.getNewsList("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=" + dong[sel]);
 		if (datas != null) {

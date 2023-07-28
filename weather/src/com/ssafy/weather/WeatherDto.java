@@ -66,13 +66,13 @@ public class WeatherDto {
 		StringBuilder builder = new StringBuilder();
 		builder.append("시간: ");
 		builder.append(hour + "시");
-		builder.append("\t");
+		builder.append("     ");
 		builder.append("온도: ");
 		builder.append(temp + "도");
-		builder.append("\t");
+		builder.append("     ");
 		builder.append("구름양: ");
 		builder.append(wfKor);
-		builder.append("\t");
+		builder.append("     ");
 		builder.append("습도: ");
 		builder.append(reh + "%");
 		return builder.toString();

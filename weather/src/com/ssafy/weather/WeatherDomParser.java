@@ -28,29 +28,29 @@ public class WeatherDomParser {
 			DocumentBuilder parser = f.newDocumentBuilder();
 			Document dom = parser.parse(new URL(url).openConnection().getInputStream());
 			Element root = dom.getDocumentElement();
-			NodeList nodeList = root.getElementsByTagName("data");
+			NodeList n = root.getElementsByTagName("data");
 
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				WeatherDto weatherDto = new WeatherDto();
-				Node item = nodeList.item(i);
+			for (int i = 0; i < n.getLength(); i++) {
+				WeatherDto w = new WeatherDto();
+				Node item = n.item(i);
 				NodeList kids = item.getChildNodes();
 				for (int j = 0; j < kids.getLength(); j++) {
 					Node kid = kids.item(j);
 					String name = kid.getNodeName();
 					if (name.equalsIgnoreCase("hour")) {
-						weatherDto.setHour(kid.getFirstChild().getNodeValue());
+						w.setHour(kid.getFirstChild().getNodeValue());
 					} else if (name.equalsIgnoreCase("temp")) {
-						weatherDto.setTemp(kid.getFirstChild().getNodeValue());
+						w.setTemp(kid.getFirstChild().getNodeValue());
 					} else if (name.equalsIgnoreCase("wfKor")) {
-						weatherDto.setWfKor(kid.getFirstChild().getNodeValue());
+						w.setWfKor(kid.getFirstChild().getNodeValue());
 					} else if (name.equalsIgnoreCase("wfKEn")) {
-						weatherDto.setWfEn(kid.getFirstChild().getNodeValue());
+						w.setWfEn(kid.getFirstChild().getNodeValue());
 					} else if (name.equalsIgnoreCase("reh")) {
-						weatherDto.setReh(kid.getFirstChild().getNodeValue());
+						w.setReh(kid.getFirstChild().getNodeValue());
 					}
 				}
-				System.out.println(weatherDto);
-				list.add(weatherDto);
+				System.out.println(w);
+				list.add(w);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
